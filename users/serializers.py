@@ -12,12 +12,12 @@ class UserSerializer(serializers.Serializer):
     password = serializers.CharField(required=False, allow_blank=True, max_length=255)
 
     def create(self, validated_data):
+        """
+        Create and return a new `User` instance, given the validated data.
+        """
+
         user = User.objects.create(
-            firstname=validated_data.pop("firstname"),
-            lastname=validated_data.pop("lastname"),
-            email=validated_data.pop("email"),
-            phone=validated_data.pop("phone"),
-            password=make_password(validated_data.pop("password")),
+            **validated_data, password=make_password(validated_data.pop("password")),
         )
 
         return user
