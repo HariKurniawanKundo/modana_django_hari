@@ -1,5 +1,6 @@
+from django.contrib.auth.models import AbstractBaseUser, UserManager
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
+
 
 # Create your models here.
 class User(AbstractBaseUser):
@@ -12,11 +13,12 @@ class User(AbstractBaseUser):
     created_at = models.DateTimeField(blank=True, null=True, auto_now_add=True)
     updated_at = models.DateTimeField(blank=True, null=True, auto_now=True)
 
+    objects = UserManager()
+
     class Meta:
         verbose_name = "User"
         verbose_name_plural = "Users"
-        db_table = 'users'
+        db_table = "users"
 
     def __str__(self):
-        return str(self.firstname) + ' ' + str(self.lastname)
-    
+        return str(self.firstname) + " " + str(self.lastname)
