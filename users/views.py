@@ -9,7 +9,7 @@ from .serializers import UserSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows users to be viewed or edited.
+    API endpoint users
     """
 
     queryset = User.objects.all()

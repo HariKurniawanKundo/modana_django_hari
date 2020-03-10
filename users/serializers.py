@@ -22,12 +22,21 @@ class UserSerializer(serializers.Serializer):
 
         return user
 
-    # def update(self, instance, validated_data):
-    #     if "user" in validated_data:
-    #         instance.user.password = make_password(
-    #             validated_data.get("password", instance.user.password)
-    #         )
-    #         instance.user.save()
+    def update(self, instance, validated_data):
+        """
+        Update and return an existing `User` instance, given the validated data.
+        """
+
+        instance.firstname = validated_data.get("firstname", instance.firstname)
+        instance.lastname = validated_data.get("lastname", instance.lastname)
+        instance.phone = validated_data.get("phone", instance.phone)
+        instance.email = validated_data.get("email", instance.email)
+        instance.password = make_password(
+            validated_data.get("password", instance.password)
+        )
+        instance.save()
+
+        return instance
 
     class Meta:
         model = User
