@@ -9,7 +9,9 @@ class UserSerializer(serializers.Serializer):
     lastname = serializers.CharField(required=True, max_length=100)
     phone = serializers.CharField(required=True, max_length=20)
     email = serializers.CharField(required=True, max_length=150)
-    password = serializers.CharField(required=True, write_only=True, min_length=5, max_length=255)
+    password = serializers.CharField(
+        required=True, write_only=True, min_length=5, max_length=255
+    )
 
     def create(self, validated_data):
         """
@@ -17,8 +19,7 @@ class UserSerializer(serializers.Serializer):
         """
 
         user = User.objects.create(
-            **validated_data,
-            password=make_password(validated_data.pop("password")),
+            **validated_data, password=make_password(validated_data.pop("password")),
         )
 
         return user
@@ -42,7 +43,6 @@ class UserSerializer(serializers.Serializer):
     class Meta:
         model = User
         fields = ["firstname", "lastname", "phone", "email", "password"]
-
 
     def validate_email(self, value):
         list_users = User.objects.filter(email=value)
