@@ -17,7 +17,8 @@ class UserSerializer(serializers.Serializer):
         """
 
         user = User.objects.create(
-            password=make_password(validated_data.pop("password"), **validated_data),
+            **validated_data,
+            password=make_password(validated_data.pop("password")),
         )
 
         return user
