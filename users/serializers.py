@@ -31,7 +31,7 @@ class UserSerializer(serializers.Serializer):
         instance.firstname = validated_data.get("firstname", instance.firstname)
         instance.lastname = validated_data.get("lastname", instance.lastname)
         instance.phone = validated_data.get("phone", instance.phone)
-        # instance.email = validated_data.get("email", instance.email)
+        instance.email = validated_data.get("email", instance.email)
         instance.password = make_password(
             validated_data.get("password", instance.password)
         )
